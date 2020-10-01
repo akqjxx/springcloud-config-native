@@ -1,0 +1,26 @@
+server:
+  port: 10002
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:./config
+  profiles:
+    active: native
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://127.0.0.1:10001/eureka
+    registry-fetch-interval-seconds: 8
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    #访问路径可以显示IP地址
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 4
+    lease-expiration-duration-in-seconds: 12
